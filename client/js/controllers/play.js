@@ -10,6 +10,8 @@ function playCtrl($scope, $state, $location, Model) {
   $scope.showEnrichment = false;
 
   $scope.enrichFull = false;
+  
+  $scope.activeLinks = "about";
 
   $scope.$watch(
     function () {
@@ -70,6 +72,13 @@ function playCtrl($scope, $state, $location, Model) {
 
   $scope.toggleEnrichment = function () {
     $scope.showEnrichment = !$scope.showEnrichment;
+  };
+
+  $scope.showLinks = function (active) {
+    $scope.activeLinks = active;
+  };
+  $scope.linkHeight = function() {
+
   };
 
 }

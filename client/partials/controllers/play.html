@@ -1,37 +1,19 @@
-<div class="header container-fluid">
-  <div class="header-content row">
-  	<div class="col-md-1">
-  		<button type="button" ng-click="goToMain()" class="btn btn-link btn-lg">
-  			<span class="glyphicon glyphicon-chevron-left"></span>
-  		</button>
-  	</div>
-  	<div class="col-md-10">
-  	  <div class="title">
-  	    <h2>Tussen Kunst en Kitsch - Museum Martena</h2>
-  	  </div>  
-  	  <!--
-  	  <div class="timeline">
-  	          <seek-bar></seek-bar>
-  	        </div>  --> 
-    </div>
-    <div class="col-md-1">
-  	  <button type="button" ng-click="toggleEnrichment()" class="btn btn-link btn-lg">
-  			<span class="glyphicon glyphicon-th-list" ng-class="{active: showEnrichment}"></span>
-  		</button>
-      <!--<bookmarking></bookmarking>-->
-  	</div>
-  </div>
+<div class="bar bar-header bar-tkk">
+  <button class="button button-icon icon ion-ios7-arrow-back" ng-click="goToMain()" ></button>
+  <h1 class="title">Tussen Kunst en Kitsch</h1>
+  <button class="button button-icon icon ion-navicon" ng-click="toggleEnrichment()" ></button>
 </div>
 
-<div class="explore container-fluid">
-  <div class="row">
-    <div class="col-md-2 col">
-      <h4>Current Program</h4>
-      <video-overview video="video"></video-overview>
-    </div>
+<ion-content class="has-header" scroll="false">
+    <div class="row">
+      <div class="col col-20 chapters">
+        <h3>Current Program</h3>
+        <ion-scroll direction="y">
+          <chapter-list video="video"></chapter-list>
+        </ion-scroll>  
+      </div>
     
-    <div class="col-md-10 col">
-      <div ng-if="!showEnrichment">
+      <div class="col col-80" ng-if="!showEnrichment">
         <div class="player">
           <player second="second" beaming="beaming"></player>
         </div>
@@ -41,35 +23,33 @@
         	</div>  
         </div>
       </div>
-      <div class="enrichPanel" ng-if="showEnrichment">
-        <!-- include enrich Panel here-->
-        <div class="col-md-4 col links">
-          <accordion close-others="oneAtATime">
-            <accordion-group heading="About">
-              <chapter-about metadata="metadata"></chapter-about>
-            </accordion-group>
-            <accordion-group heading="Artworks">
-              <chapter-artworks metadata="metadata"></chapter-artworks>
-            </accordion-group>
-            <accordion-group heading="Background">
-            </accordion-group>
-            <accordion-group heading="Chapters">
-              <chapter-related></chapter-related>
-            </accordion-group>
-          </accordion>
-        </div>
-        <div class="col-md-8 col content">
-          <div ng-if="loading">
-            <div class="text-center"><i>Loading ...</i></div>
-          </div>
-          <div ng-if="!loading">
-            <information-card props="proxyAnswer" browse="proxy"></information-card>
-          </div>
-        </div>
+          
+      <div class="col col-25 links" ng-if="showEnrichment">
+        <h3 ng-click="showLinks('about')">About</h3>
+        <ion-scroll direction="y" ng-show="activeLinks=='about'">
+          <chapter-about metadata="metadata"></chapter-about>
+        </ion-scroll>
+        <h3 ng-click="showLinks('artworks')">Artworks</h3>
+        <ion-scroll direction="y" ng-show="activeLinks=='artworks'">
+          <chapter-artworks metadata="metadata"></chapter-artworks>
+        </ion-scroll>  
+        <h3 ng-click="showLinks('background')">Background</h3>
+        <ion-scroll direction="y" ng-show="activeLinks=='background'">
+        </ion-scroll>
+        <h3 ng-click="showLinks('chapters')">Chapters</h3>
+        <ion-scroll direction="y" ng-show="activeLinks=='chapters'">
+          <chapter-related></chapter-related>
+        </ion-scroll>
       </div>
+      <div class="col content" ng-if="showEnrichment">
+        <div ng-if="!loading">
+          <information-card props="proxyAnswer" browse="proxy"></information-card>
+        </div>
+      </div>  
+    
     </div>
-  </div>
-</div>
+
+</ion-content>  
 
 <!--
 <div class="player">
@@ -82,4 +62,35 @@
 	  <player-controls beaming="beaming" show-enrichment="showEnrichment"></player-controls>
 	</div>  
 </div>
+-->
+
+<!--
+ <div class="enrichPanel" ng-if="showEnrichment">
+
+    <div class="col col-30 links">
+      <accordion close-others="oneAtATime">
+        <accordion-group heading="About">
+          <chapter-about metadata="metadata"></chapter-about>
+        </accordion-group>
+        <accordion-group heading="Artworks">
+          <chapter-artworks metadata="metadata"></chapter-artworks>
+        </accordion-group>
+        <accordion-group heading="Background">
+        </accordion-group>
+        <accordion-group heading="Chapters">
+          <chapter-related></chapter-related>
+        </accordion-group>
+      </accordion>
+    </div>
+    <div class="col col-70 content">
+      <div ng-if="loading">
+        <div class="text-center"><i>Loading ...</i></div>
+      </div>
+      <div ng-if="!loading">
+        <information-card props="proxyAnswer" browse="proxy"></information-card>
+      </div>
+    </div>
+  </div>
+</div>
+
 -->

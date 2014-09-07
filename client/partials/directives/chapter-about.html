@@ -1,9 +1,16 @@
+<ion-list>
+  <ion-item ng-repeat="d in metadata" class="item entity">
+    <h4>{{d.value}}</h4>
+  </ion-item>
+</ion-list>
+
+<!--
 <ul class="about" ng-if="metadata">
   <li ng-repeat="d in metadata" ng-click="nav(d)">
     <div class="title">{{d.value}}</div>
   </li>
 </ul>
-
+-->
 <!--
 <div class="about-panel">
 
